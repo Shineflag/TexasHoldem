@@ -204,14 +204,14 @@ func (h *Hand)AnalyseHand() error{
 	每三位代表一个花色的数目，从低位到高位分别代表黑桃、红桃、梅花、方片
 	例如101000000010表示有两个黑桃、五个方片
 	例如000000000111表示有七个黑桃
-	所以只需要将每一个三位减去5，结果大于等于0，就说明有同花
+	所以只需要判断每一个三位是否大于等于5，就说明有同花
 
 	还是同理，场上有且只有可能出现一个花色的同花
 	都是同花的情况下，就比较谁的同花大
 	*/
 	for i:=0; i<card.SUITSIZE; i++{
-		tmp := (h.flush>>uint(SuitShift[i])) - 5
-		if tmp >=0 {
+		tmp := (h.flush>>uint(SuitShift[i]))
+		if tmp >=5{
 			h.Level = 6
 			h.FinalValue = h.straight[i]
 			return nil
