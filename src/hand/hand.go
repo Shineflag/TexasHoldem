@@ -210,7 +210,7 @@ func (h *Hand)AnalyseHand() error{
 	都是同花的情况下，就比较谁的同花大
 	*/
 	for i:=0; i<card.SUITSIZE; i++{
-		tmp := (h.flush>>uint(SuitShift[i]))
+		tmp := (h.flush>>uint(SuitShift[i])) & 7
 		if tmp >=5{
 			h.Level = 6
 			h.FinalValue = h.straight[i]
